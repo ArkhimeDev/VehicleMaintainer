@@ -51,6 +51,7 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         onCreate(db)
     }
+
     //Función para insertar un vehiculo en la base de datos pasando como parámetro un objeto tipo Vehiculo
     fun insertarVehiculo(vehiculo:Vehiculo){
 
@@ -262,6 +263,27 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
             return listaMantenimiento
         }
         else{
+            return null
+        }
+        datos.close()
+        db.close()
+    }
+
+    //Función que devuelve un Mensaje parando por parametro un idMantenimiento
+    fun seleccionarMensaje (idMantenimiento: Int):Mensaje?{
+        val db = this.readableDatabase
+        val datos = db.rawQuery("SELECT * FROM mensaje WHERE id_mantenimiento = '$idMantenimiento'", null)
+        if (datos.moveToFirst()){
+            val mensaje = Mensaje(
+                idMensaje = datos.getInt(0),
+                mensaje = datos.getString(1),
+                fecha = datos.getString(2),
+                kilometraje = datos.getInt(3),
+                estado = datos.getInt(4),
+                idMantenimiento = datos.getInt(5)
+            )
+            return mensaje
+        }else{
             return null
         }
         datos.close()

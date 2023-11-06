@@ -52,6 +52,7 @@ class MensajeViewHolder(view: View):RecyclerView.ViewHolder(view) {
                 .setMessage("¿Esatá seguro de que desea eliminar el mensaje?")
                 .setPositiveButton(R.string.txt_aceptar){ dialog, which ->
                     miSqlHelper.borrarMensaje(mensaje.idMensaje!!)
+                    miSqlHelper.borrarMantenimiento(mensaje.idMantenimiento!!)
                     Toast.makeText(btnEliminar.context,"Mensaje eliminado",Toast.LENGTH_SHORT).show()
                     val intent = Intent(btnEliminar.context, MensajeActivity::class.java)
                     startActivity(btnEliminar.context,intent,null)

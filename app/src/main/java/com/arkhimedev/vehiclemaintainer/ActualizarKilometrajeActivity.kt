@@ -35,31 +35,11 @@ class ActualizarKilometrajeActivity : AppCompatActivity() {
                     Toast.makeText(this, "El kilometraje introducido no puede ser menor al del vehiculo", Toast.LENGTH_LONG).show()
                 }else{
                     miSqlHelper.actualizarKilometraje(matricula,etKilometraje.text.toString().toInt())
-                    val listaMantenimiento = miSqlHelper.seleccionarListaMantenimientoVehiculo(matricula, MANTENIMIENTO_PROGRAMADO)
-                    var numeroMantenimientos = 0
-                    if (listaMantenimiento != null) {
-                        numeroMantenimientos = compararKilometraje(vehiculo.kilometraje!!,listaMantenimiento)
-                    }
-                    if(numeroMantenimientos>=1){
-                        AlertDialog.Builder(this)
-                            .setTitle("Mantenimiento a realizar")
-                            .setMessage("Tienes un nuevo mantenimiento a realizar")
-                            .setPositiveButton(R.string.txt_aceptar){ dialog, which ->
-                                val intent = Intent(this,MensajeActivity::class.java)
-                                ContextCompat.startActivity(this, intent, null)
-                            }
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show()
-                    }
-                    else{
-                        this.finish()
-                        val intent= Intent(this,VehiculoActivity::class.java)
-                        intent.putExtra("matricula",matricula)
-                        startActivity(intent)
-                        Toast.makeText(this, "El kilometraje ha sido actualizado", Toast.LENGTH_LONG).show()
-
-                    }
-
+                    this.finish()
+                    val intent= Intent(this,VehiculoActivity::class.java)
+                    intent.putExtra("matricula",matricula)
+                    startActivity(intent)
+                    Toast.makeText(this, "El kilometraje ha sido actualizado", Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -69,7 +49,7 @@ class ActualizarKilometrajeActivity : AppCompatActivity() {
     fun compararKilometraje(kiometraje:Int,listaMantenimiento: List<Mantenimiento>):Int{
         val lista = mutableListOf<Mantenimiento>()
         for(mantenimiento in listaMantenimiento) {
-            if (mantenimiento.kilometraje != null && mantenimiento.kilometraje!! <= kiometraje) {
+            if (mantenimiento.kilometraje != null && kiometraje >= mantenimiento.kilometraje!!) {
                 lista.add(mantenimiento)
             }
         }
