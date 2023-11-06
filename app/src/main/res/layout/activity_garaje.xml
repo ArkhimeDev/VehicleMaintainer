@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GarajeActivity"
+    android:background="@color/gris">
+
+    <LinearLayout
+        android:id="@+id/menu"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/azul_claro"
+        android:gravity="center">
+        <ImageButton
+            android:id="@+id/btnListMantProgramados"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="50dp"
+            android:src="@drawable/listamantenimientosprogramados">
+
+        </ImageButton>
+        <ImageButton
+            android:id="@+id/btnNuevoVehiculo"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="50dp"
+            android:src="@drawable/nuevovehiculo">
+
+        </ImageButton>
+        <ImageButton
+            android:id="@+id/btnMensajes"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/mensajes">
+
+        </ImageButton>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerVehiculo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu"
+        android:background="@color/white"
+        android:scrollbars="vertical"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

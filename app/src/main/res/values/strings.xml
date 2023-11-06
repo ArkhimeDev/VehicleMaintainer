@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">VehicleMaintainer</string>
+    <string name="txt_marca">Marca</string>
+    <string name="txt_modelo">Modelo</string>
+    <string name="txt_matricula">Matrícula</string>
+    <string name="txt_kilometraje">Kilometraje</string>
+    <string name="txt_fecha_matriculacion">Fecha de matriculación</string>
+    <string name="txt_fecha_realizacion">Fecha de realización</string>
+    <string name="txt_tipo_combustible">Tipo de combustible</string>
+    <string name="txt_numero_bastidor">Número de bastidor</string>
+    <string name="txt_nuevo_vehiculo">Registrar nuevo vehículo</string>
+    <string name="txt_nuevo_mantenimiento">Registrar nuevo mantenimiento</string>
+    <string name="txt_importe">Importe</string>
+    <string name="txt_mantenimientos_realizados">Mantenimientos realizados</string>
+    <string name="txt_descripcion">Descripción:</string>
+    <string name="txt_programar_mantenimiento">Programar nuevo mantenimiento</string>
+    <string name="txt_tipo_programacion">Seleccione el tipo de programación</string>
+    <string name="txt_seleccion_fecha">Programar  por fecha</string>
+    <string name="txt_seleccion_kilometraje">Programar por Kilometraje</string>
+    <string name="txt_mantenimientos_programados">Mantenimientos programados</string>
+    <string name="txt_nuevo_mensaje">Nuevo mantenimiernto a realizar</string>
+    <string name="txt_leido">Leído</string>
+    <string name="txt_mensaje">Mensajes</string>
+    <string name="txt_aceptar">ACEPTAR</string>
+    <string name="txt_cancelar">CANCELAR</string>
+
+
+</resources>
