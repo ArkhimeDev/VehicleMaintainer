@@ -103,7 +103,7 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
         db.close()
     }
 
-    //Función para borrar a un vehiculo pasando una matricula como parámetro
+    //Función para borrar a un vehiculo pasando una matrícula como parámetro
     fun borrarVehiculo (matricula: String){
         val db = this.writableDatabase
         db.execSQL("PRAGMA foreign_keys=ON")
@@ -119,7 +119,7 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
         db.close()
     }
 
-    //Función para actualizar el kilometraje pasando la matricula y el nuevo kilometraje por parámetro
+    //Función para actualizar el kilometraje pasando la matrícula y el nuevo kilometraje por parámetro
     fun actualizarKilometraje (matricula:String, kilometraje : Int){
         val db = this.writableDatabase
         val valores = ContentValues().apply { put("kilometraje", kilometraje) }
@@ -127,7 +127,7 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
         db.close()
     }
 
-    //Función que devuelve un objeto de tipo Vehiculo pasando por parámetro una matricula
+    //Función que devuelve un objeto de tipo Vehiculo pasando por parámetro una matrícula
     fun seleccionarVehiculo (matricula:String):Vehiculo?{
         val db = this.readableDatabase
         val datos = db.rawQuery("SELECT * FROM vehiculo WHERE matricula='$matricula' ",null)

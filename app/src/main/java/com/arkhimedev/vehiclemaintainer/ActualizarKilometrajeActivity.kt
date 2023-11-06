@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
+import com.arkhimedev.vehiclemaintainer.Mantenimiento.Companion.MANTENIMIENTO_PROGRAMADO
 
 class ActualizarKilometrajeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,18 +21,58 @@ class ActualizarKilometrajeActivity : AppCompatActivity() {
         val bundle = intent.extras
         val matricula = bundle?.getString("matricula")
         val miSqlHelper=MiSqlHelper(this)
+        val vehiculo = miSqlHelper.seleccionarVehiculo(matricula!!)
 
         btnCancelar.setOnClickListener(){
             this.finish()
         }
         btnAceptar.setOnClickListener(){
-            if(matricula!=null){
-                miSqlHelper.actualizarKilometraje(matricula,etKilometraje.text.toString().toInt())
+            if(etKilometraje.text.isEmpty()){
+                Toast.makeText(this, "Introduce un kilometraje", Toast.LENGTH_LONG).show()
             }
-            this.finish()
-            val intent= Intent(this,VehiculoActivity::class.java)
-            intent.putExtra("matricula",matricula)
-            startActivity(intent)
+            else{
+                if(etKilometraje.text.toString().toInt() < vehiculo!!.kilometraje!!){
+                    Toast.makeText(this, "El kilometraje introducido no puede ser menor al del vehiculo", Toast.LENGTH_LONG).show()
+                }else{
+                    miSqlHelper.actualizarKilometraje(matricula,etKilometraje.text.toString().toInt())
+                    val listaMantenimiento = miSqlHelper.seleccionarListaMantenimientoVehiculo(matricula, MANTENIMIENTO_PROGRAMADO)
+                    var numeroMantenimientos = 0
+                    if (listaMantenimiento != null) {
+                        numeroMantenimientos = compararKilometraje(vehiculo.kilometraje!!,listaMantenimiento)
+                    }
+                    if(numeroMantenimientos>=1){
+                        AlertDialog.Builder(this)
+                            .setTitle("Mantenimiento a realizar")
+                            .setMessage("Tienes un nuevo mantenimiento a realizar")
+                            .setPositiveButton(R.string.txt_aceptar){ dialog, which ->
+                                val intent = Intent(this,MensajeActivity::class.java)
+                                ContextCompat.startActivity(this, intent, null)
+                            }
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show()
+                    }
+                    else{
+                        this.finish()
+                        val intent= Intent(this,VehiculoActivity::class.java)
+                        intent.putExtra("matricula",matricula)
+                        startActivity(intent)
+                        Toast.makeText(this, "El kilometraje ha sido actualizado", Toast.LENGTH_LONG).show()
+
+                    }
+
+                }
+            }
         }
+    }
+    //Función que compara el kilometraje actual del vehículo con los kilometrajes de mantenimientos
+    //pasando por parametro un kilometraje y una lista de mantenimientos
+    fun compararKilometraje(kiometraje:Int,listaMantenimiento: List<Mantenimiento>):Int{
+        val lista = mutableListOf<Mantenimiento>()
+        for(mantenimiento in listaMantenimiento) {
+            if (mantenimiento.kilometraje != null && mantenimiento.kilometraje!! <= kiometraje) {
+                lista.add(mantenimiento)
+            }
+        }
+        return  lista.size
     }
 }
