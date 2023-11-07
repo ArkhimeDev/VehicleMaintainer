@@ -233,7 +233,7 @@ class ProgramarMantenimientoActivity : AppCompatActivity() {
             val canal = NotificationChannel(
                 ID_CANAL,
                 "Mi canal",
-                NotificationManager.IMPORTANCE_DEFAULT
+                NotificationManager.IMPORTANCE_HIGH
             )
             val notificationManager:NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(canal)

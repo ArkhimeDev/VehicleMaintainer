@@ -1,17 +1,14 @@
 package com.arkhimedev.vehiclemaintainer
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arkhimedev.vehiclemaintainer.Mantenimiento.Companion.MANTENIMIENTO_PROGRAMADO
-import com.arkhimedev.vehiclemaintainer.Mantenimiento.Companion.MANTENIMIENTO_REALIZADO
 import com.arkhimedev.vehiclemaintainer.Mensaje.Companion.NO_LEIDO
 import com.arkhimedev.vehiclemaintainer.adapter.VehiculoAdapter
 import java.util.*
@@ -38,7 +35,7 @@ class GarajeActivity : AppCompatActivity() {
         if(listaMantenimiento!=null&&listaVehiculo!=null){
             val listaIdMantenimiento = seleccionarIdMantenimiento(listaVehiculo,listaMantenimiento)
             if(listaIdMantenimiento!=null){
-                listaMensajesVisibles = seleccionarListaMensajesVisibles(listaIdMantenimiento)
+                listaMensajesVisibles = seleccionarListaMensajesNoLeidos(listaIdMantenimiento)
             }
         }
         if(listaMensajesVisibles.size>=1){
@@ -105,8 +102,8 @@ class GarajeActivity : AppCompatActivity() {
         }
     }
 
-    //Función que retorna una lista de Mensaje pasando por parametro una lista de idMantenimiento
-    fun seleccionarListaMensajesVisibles(listaIdMantenimiento: List<Int>): List<Mensaje> {
+    //Función que retorna una lista de Mensaje no leidos pasando por parametro una lista de idMantenimiento
+    fun seleccionarListaMensajesNoLeidos(listaIdMantenimiento: List<Int>): List<Mensaje> {
         val miSqlHelper = MiSqlHelper(this)
         var listaMensaje = mutableListOf<Mensaje>()
         for (id in listaIdMantenimiento){
