@@ -42,25 +42,6 @@ class VehiculoActivity : AppCompatActivity() {
         tvTipoCombustible.setText(vehiculo?.tipoCombustible)
         tvNumeroBastidor.setText(vehiculo?.numeroBastidor)
 
-        val listaMantenimiento = miSqlHelper.seleccionarListaMantenimientoVehiculo(matricula!!,
-            Mantenimiento.MANTENIMIENTO_PROGRAMADO
-        )
-        var numeroMantenimientos = 0
-        if (listaMantenimiento != null) {
-            numeroMantenimientos = compararKilometraje(vehiculo!!.kilometraje!!,listaMantenimiento)
-        }
-        if(numeroMantenimientos>=1){
-            AlertDialog.Builder(this)
-                .setTitle("Mantenimiento a realizar")
-                .setMessage("Tienes un nuevo mantenimiento a realizar")
-                .setPositiveButton(R.string.txt_aceptar){ dialog, which ->
-                    val intent = Intent(this,MensajeActivity::class.java)
-                    ContextCompat.startActivity(this, intent, null)
-                }
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show()
-        }
-
         //Botón para volver a la pantalla principal
         btnGaraje.setOnClickListener {
             val intent = Intent(this, GarajeActivity::class.java)
@@ -91,17 +72,6 @@ class VehiculoActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-    }
-    //Función que compara el kilometraje actual del vehículo con los kilometrajes de mantenimientos
-    //pasando por parametro un kilometraje y una lista de mantenimientos
-    fun compararKilometraje(kiometraje:Int,listaMantenimiento: List<Mantenimiento>):Int{
-        val lista = mutableListOf<Mantenimiento>()
-        for(mantenimiento in listaMantenimiento) {
-            if (mantenimiento.kilometraje != null && kiometraje >= mantenimiento.kilometraje!!) {
-                lista.add(mantenimiento)
-            }
-        }
-        return  lista.size
     }
 
 }
