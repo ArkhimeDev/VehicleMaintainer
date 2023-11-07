@@ -3,12 +3,12 @@ package com.arkhimedev.vehiclemaintainer
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arkhimedev.vehiclemaintainer.adapter.MensajeAdapter
 import com.arkhimedev.vehiclemaintainer.Mantenimiento.Companion.MANTENIMIENTO_PROGRAMADO
+import com.arkhimedev.vehiclemaintainer.Mensaje.Companion.NO_LEIDO
 import java.util.Calendar
 
 class MensajeActivity : AppCompatActivity() {
@@ -25,6 +25,7 @@ class MensajeActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+    //Función que inicia el RecyclerView
     fun iniciarRecyclerView(){
 
         val miSqlHelper = MiSqlHelper(this)
@@ -54,7 +55,8 @@ class MensajeActivity : AppCompatActivity() {
         for(vehiculo in listaVehiculo) {
             for(mantenimiento in listaMantenimiento){
 
-                if(mantenimiento.kilometraje!!> 0 &&(vehiculo.matricula==mantenimiento.matricula && vehiculo.kilometraje!!>=mantenimiento.kilometraje!!)){
+                if(mantenimiento.kilometraje!!> 0 &&(vehiculo.matricula==mantenimiento.matricula &&
+                            vehiculo.kilometraje!!>=mantenimiento.kilometraje!!)){
                     listaIdMantenimiento.add(mantenimiento.idMantenimiento!!)
                 }
                 if(mantenimiento.fecha!=null){
@@ -73,7 +75,8 @@ class MensajeActivity : AppCompatActivity() {
         }
     }
 
-    //Función que retorna una lista de Mensaje pasando por parametro una lista de idMantenimiento
+    //Función que retorna una lista de Mensaje que tienen que ser visibles pasando por parametro
+    //una lista de idMantenimiento
     fun listaMensajesVisibles(listaIdMantenimiento: List<Int>): List<Mensaje> {
         val miSqlHelper = MiSqlHelper(this)
         var listaMensaje = mutableListOf<Mensaje>()

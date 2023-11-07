@@ -23,6 +23,9 @@ class MensajeViewHolder(view: View):RecyclerView.ViewHolder(view) {
     fun render(mensaje: Mensaje){
 
         tvDescripcion.setText(mensaje.mensaje)
+        if(mensaje.estado == LEIDO){
+            cbLeido.isChecked = true
+        }
 
         cbLeido.setOnClickListener(){
             if(cbLeido.isChecked){
