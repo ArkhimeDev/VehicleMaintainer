@@ -5,43 +5,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".GarajeActivity"
-    android:background="@color/gris">
+    android:background="@color/azul_claro">
 
-    <LinearLayout
-        android:id="@+id/menu"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:orientation="horizontal"
+    <ImageButton
+        android:id="@+id/btnListMantProgramados"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/listamantenimientosprogramados"
+        app:layout_constraintEnd_toStartOf="@+id/btnNuevoVehiculo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/btnNuevoVehiculo"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/nuevovehiculo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/azul_claro"
-        android:gravity="center">
-        <ImageButton
-            android:id="@+id/btnListMantProgramados"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginRight="50dp"
-            android:src="@drawable/listamantenimientosprogramados">
+        app:layout_constraintTop_toTopOf="parent">
 
-        </ImageButton>
-        <ImageButton
-            android:id="@+id/btnNuevoVehiculo"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginRight="50dp"
-            android:src="@drawable/nuevovehiculo">
+    </ImageButton>
 
-        </ImageButton>
-        <ImageButton
-            android:id="@+id/btnMensajes"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/mensajes">
 
-        </ImageButton>
+    <ImageButton
+        android:id="@+id/btnMensajes"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/mensajes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnNuevoVehiculo"
+        app:layout_constraintTop_toTopOf="parent">
 
-    </LinearLayout>
+    </ImageButton>
+
+    <TextView
+        android:id="@+id/tvNumeroMensajes"
+        android:layout_width="25dp"
+        android:layout_height="28dp"
+        android:textColor="@color/azul_oscuro"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:background="@drawable/fondomensaje"
+        app:layout_constraintBottom_toBottomOf="@+id/btnMensajes"
+        app:layout_constraintStart_toEndOf="@+id/btnMensajes" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerVehiculo"
@@ -50,9 +63,11 @@
         android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu"
+        app:layout_constraintTop_toBottomOf="@+id/btnNuevoVehiculo"
         android:background="@color/white"
         android:scrollbars="vertical"/>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

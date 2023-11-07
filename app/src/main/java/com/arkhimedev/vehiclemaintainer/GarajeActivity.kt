@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arkhimedev.vehiclemaintainer.Mantenimiento.Companion.MANTENIMIENTO_PROGRAMADO
@@ -22,6 +24,9 @@ class GarajeActivity : AppCompatActivity() {
         val btnListMantProgramados = findViewById<ImageButton>(R.id.btnListMantProgramados)
         val btnNuevoVehiculo = findViewById<ImageButton>(R.id.btnNuevoVehiculo)
         val btnMensajes = findViewById<ImageButton>(R.id.btnMensajes)
+        val tvNumeroMensajes = findViewById<TextView>(R.id.tvNumeroMensajes)
+
+        tvNumeroMensajes.isVisible = false
 
         iniciarRecyclerView()
 
