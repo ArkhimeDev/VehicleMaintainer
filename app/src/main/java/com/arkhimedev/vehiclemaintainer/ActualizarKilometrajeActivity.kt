@@ -1,6 +1,7 @@
 package com.arkhimedev.vehiclemaintainer
 
 import android.content.Intent
+import android.media.RingtoneManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -8,7 +9,6 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
-import com.arkhimedev.vehiclemaintainer.Mantenimiento.Companion.MANTENIMIENTO_PROGRAMADO
 import com.arkhimedev.vehiclemaintainer.Mensaje.Companion.NO_LEIDO
 
 class ActualizarKilometrajeActivity : AppCompatActivity() {
@@ -36,7 +36,7 @@ class ActualizarKilometrajeActivity : AppCompatActivity() {
                     Toast.makeText(this, "El kilometraje introducido no puede ser menor o igual al del vehiculo", Toast.LENGTH_LONG).show()
                 }else{
                     miSqlHelper.actualizarKilometraje(matricula,etKilometraje.text.toString().toInt())
-                    val vehiculoActualizado = miSqlHelper.seleccionarVehiculo(matricula!!)
+                    val vehiculoActualizado = miSqlHelper.seleccionarVehiculo(matricula)
                     Toast.makeText(this, "El kilometraje ha sido actualizado", Toast.LENGTH_LONG).show()
                     val listaMensajes = miSqlHelper.seleccionarListaMensaje()
                     var mensajeNuevo = false
@@ -77,5 +77,8 @@ class ActualizarKilometrajeActivity : AppCompatActivity() {
             }
             .setIcon(android.R.drawable.ic_dialog_alert)
             .show()
+        val notificacion = RingtoneManager.getActualDefaultRingtoneUri(this,RingtoneManager.TYPE_NOTIFICATION)
+        val sonido = RingtoneManager.getRingtone(this,notificacion)
+        sonido.play()
     }
 }
