@@ -3,6 +3,7 @@ package com.arkhimedev.vehiclemaintainer
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +35,7 @@ class MensajeActivity : AppCompatActivity() {
         val listaVehiculo = miSqlHelper.seleccionarListaVehiculos()
         if(listaMantenimiento!=null&&listaVehiculo!=null){
             val listaIdMantenimiento = seleccionarIdMantenimiento(listaVehiculo,listaMantenimiento)
+            Log.e("lista id", listaIdMantenimiento.toString())
             if(listaIdMantenimiento!=null){
                 listaMensajesVisibles = listaMensajesVisibles(listaIdMantenimiento)
             }
@@ -59,15 +61,15 @@ class MensajeActivity : AppCompatActivity() {
                             vehiculo.kilometraje!!>=mantenimiento.kilometraje!!)){
                     listaIdMantenimiento.add(mantenimiento.idMantenimiento!!)
                 }
-                if(mantenimiento.fecha!=null){
+                if(mantenimiento.fecha!=null && vehiculo.matricula==mantenimiento.matricula){
                     val fecha = mantenimiento.fecha!!.split(delimitador)
                     if(dia >= fecha[0].toInt() && mes >= fecha[1].toInt() && anyo >= fecha[2].toInt()){
-                        listaIdMantenimiento.add(mantenimiento.idMantenimiento!!)
+                                listaIdMantenimiento.add(mantenimiento.idMantenimiento!!)
                     }
                 }
             }
-
         }
+
         if(listaIdMantenimiento!=null){
             return listaIdMantenimiento
         }else{

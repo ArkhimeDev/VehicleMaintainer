@@ -86,7 +86,7 @@ class GarajeActivity : AppCompatActivity() {
                 if(mantenimiento.kilometraje!!> 0 &&(vehiculo.matricula==mantenimiento.matricula && vehiculo.kilometraje!!>=mantenimiento.kilometraje!!)){
                     listaIdMantenimiento.add(mantenimiento.idMantenimiento!!)
                 }
-                if(mantenimiento.fecha!=null){
+                if(mantenimiento.fecha!=null && vehiculo.matricula==mantenimiento.matricula){
                     val fecha = mantenimiento.fecha!!.split(delimitador)
                     if(dia >= fecha[0].toInt() && mes >= fecha[1].toInt() && anyo >= fecha[2].toInt()){
                         listaIdMantenimiento.add(mantenimiento.idMantenimiento!!)
