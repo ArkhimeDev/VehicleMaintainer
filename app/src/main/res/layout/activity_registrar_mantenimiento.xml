@@ -6,42 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".RegistrarMantenimientoActivity">
 
-    <LinearLayout
-        android:id="@+id/menu"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:orientation="horizontal"
+        android:background="@color/azul_claro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/azul_claro"
-        android:gravity="center">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/btnGaraje"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="5dp"
-            android:src="@drawable/garaje">
+    <ImageButton
+        android:contentDescription="@string/btn_garaje"
+        android:id="@+id/btnGaraje"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/garaje"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        </ImageButton>
+    </ImageButton>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:text="@string/txt_nuevo_mantenimiento"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="30dp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:text="@string/txt_nuevo_mantenimiento"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/btnGaraje"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextDescripcion"
@@ -54,14 +55,16 @@
         android:hint="Descripción"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/editTextFechaRealizacion"
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:background="@color/gris"
@@ -72,6 +75,8 @@
         android:inputType="date"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDescripcion" />
@@ -79,7 +84,7 @@
     <EditText
         android:id="@+id/editTextKilometraje"
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:background="@color/gris"
@@ -88,6 +93,9 @@
         android:inputType="number"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:maxLength="9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextFechaRealizacion" />
@@ -95,7 +103,7 @@
     <EditText
         android:id="@+id/editTextImporte"
         android:layout_width="300dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:background="@color/gris"
@@ -104,11 +112,15 @@
         android:inputType="numberDecimal"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:maxLength="9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextKilometraje" />
 
     <ImageButton
+        android:contentDescription="@string/btn_cancelar"
         android:id="@+id/btnCancelar"
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -121,6 +133,7 @@
     </ImageButton>
 
     <ImageButton
+        android:contentDescription="@string/btn_aceptar"
         android:id="@+id/btnAceptar"
         android:layout_width="70dp"
         android:layout_height="70dp"

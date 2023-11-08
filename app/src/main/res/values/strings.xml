@@ -23,6 +23,24 @@
     <string name="txt_mensaje">Mensajes</string>
     <string name="txt_aceptar">ACEPTAR</string>
     <string name="txt_cancelar">CANCELAR</string>
+    <string name="ir_a_vehiculo">Ir a vehiculo</string>
+    <string name="eliminar_vehiculo">Eliminar vehiculo</string>
+    <string name="btn_cancelar">Botón cancelar</string>
+    <string name="btn_garaje">Botón Garaje</string>
+    <string name="btn_aceptar">Botón Aceptar</string>
+    <string name="spinner_tipos_combustibles">spinner tipos de combustibles</string>
+    <string name="indica_kilometraje">Indica el nuevo kilometraje</string>
+    <string name="btn_mant_programados">Botón mantenimientos programados</string>
+    <string name="btn_nuevo_vehiculo">Botón nuevo vehículo</string>
+    <string name="btn_mensajes">Botón mensajes</string>
+    <string-array name="tipos_de_combustible">
+        <item>Gasolina</item>
+        <item>Diésel</item>
+        <item>Eléctrico</item>
+        <item>Híbrido</item>
+        <item>Gas Natural</item>
+        <item>GLP</item>
+    </string-array>
 
 
 </resources>

@@ -5,10 +5,9 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.core.view.size
 import java.util.*
 
 class RegistrarVehiculoActivity : AppCompatActivity() {
@@ -26,11 +25,21 @@ class RegistrarVehiculoActivity : AppCompatActivity() {
         val editTextMatricula = findViewById<EditText>(R.id.editTextMatricula)
         val editTextKilometraje = findViewById<EditText>(R.id.editTextKilometraje)
         val editTextFechaMatriculacion = findViewById<EditText>(R.id.editTextFechaMatriculacion)
-        val editTextTipoCombustible = findViewById<EditText>(R.id.editTextTipoCombustible)
+        val spinnerTipoCombustible = findViewById<Spinner>(R.id.SpinnerTipoCombustible)
         val editTextNumeroBastidor = findViewById<EditText>(R.id.editTextNumeroBastidor)
         val btnGaraje = findViewById<ImageButton>(R.id.btnGaraje)
         val btnAceptar = findViewById<ImageButton>(R.id.btnAceptar)
         val btnCancelar = findViewById<ImageButton>(R.id.btnCancelar)
+
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.tipos_de_combustible,
+            R.layout.item_spinner
+        ).also { adapter ->
+            adapter.setDropDownViewResource(R.layout.item_spinner)
+            spinnerTipoCombustible.adapter = adapter
+        }
+
         miSqlHelper = MiSqlHelper(this)
 
         //Botón para volver a la pantalla principal
@@ -44,7 +53,7 @@ class RegistrarVehiculoActivity : AppCompatActivity() {
             //Primero se comprueba que todos los campos tengan valor
             if (editTextMarca.text.isEmpty()||editTextModelo.text.isEmpty()||editTextMatricula.text.isEmpty()||
                 editTextKilometraje.text.isEmpty()||editTextFechaMatriculacion.text.isEmpty()||
-                editTextTipoCombustible.text.isEmpty()||editTextNumeroBastidor.text.isEmpty()){
+                editTextNumeroBastidor.text.isEmpty()){
                 //Si hay algun campo vacío, se lo hago saber al usuario mediante un Toast
                 Toast.makeText(this,"Rellena todos los campos del vehículo",Toast.LENGTH_LONG).show()
             }
@@ -62,7 +71,7 @@ class RegistrarVehiculoActivity : AppCompatActivity() {
                         editTextModelo.text.toString(),
                         editTextFechaMatriculacion.text.toString(),
                         editTextKilometraje.text.toString().toInt(),
-                        editTextTipoCombustible.text.toString()
+                        spinnerTipoCombustible.selectedItem.toString()
                     )
 
                     miSqlHelper.insertarVehiculo(vehiculo)
@@ -74,7 +83,6 @@ class RegistrarVehiculoActivity : AppCompatActivity() {
                     editTextModelo.setText("")
                     editTextFechaMatriculacion.setText("")
                     editTextKilometraje.setText("")
-                    editTextTipoCombustible.setText("")
                 }
             }
 

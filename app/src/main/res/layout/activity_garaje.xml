@@ -8,6 +8,7 @@
     android:background="@color/azul_claro">
 
     <ImageButton
+        android:contentDescription="@string/btn_mant_programados"
         android:id="@+id/btnListMantProgramados"
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -20,6 +21,7 @@
     </ImageButton>
 
     <ImageButton
+        android:contentDescription="@string/btn_nuevo_vehiculo"
         android:id="@+id/btnNuevoVehiculo"
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -33,6 +35,7 @@
 
 
     <ImageButton
+        android:contentDescription="@string/btn_mensajes"
         android:id="@+id/btnMensajes"
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -49,7 +52,7 @@
         android:layout_width="25dp"
         android:layout_height="28dp"
         android:textColor="@color/azul_oscuro"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textAlignment="center"
         android:gravity="center"
         android:background="@drawable/fondomensaje"
@@ -66,8 +69,5 @@
         app:layout_constraintTop_toBottomOf="@+id/btnNuevoVehiculo"
         android:background="@color/white"
         android:scrollbars="vertical"/>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,41 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".ProgramarMantenimientoActivity">
 
-    <LinearLayout
-        android:id="@+id/menu"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:orientation="horizontal"
+        android:background="@color/azul_claro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/azul_claro"
-        android:gravity="center">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/btnGaraje"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="5dp"
-            android:src="@drawable/garaje">
+    <ImageButton
+        android:contentDescription="@string/btn_garaje"
+        android:id="@+id/btnGaraje"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="5dp"
+        android:src="@drawable/garaje"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        </ImageButton>
+    </ImageButton>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:text="@string/txt_programar_mantenimiento"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="30dp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="1"
+        android:text="@string/txt_programar_mantenimiento"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnGaraje"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
 
     <TextView
         android:id="@+id/textView3"
@@ -48,11 +51,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/txt_tipo_programacion"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -70,20 +73,20 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:text="@string/txt_seleccion_fecha"
-            android:textSize="20dp"/>
+            android:textSize="20sp"/>
 
         <RadioButton
             android:id="@+id/rbKilometraje"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:text="@string/txt_seleccion_kilometraje"
-            android:textSize="20dp"/>
+            android:textSize="20sp"/>
     </RadioGroup>
 
     <EditText
         android:id="@+id/editTextFecha"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginTop="20dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
@@ -91,6 +94,8 @@
         android:inputType="date"
         android:hint="Indique la fecha"
         android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:textAlignment="center"
         android:focusable="false"
         android:clickable="true"
@@ -102,7 +107,7 @@
     <EditText
         android:id="@+id/editTextHora"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginTop="20dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
@@ -111,6 +116,8 @@
         android:inputType="time"
         android:hint="Indique la hora"
         android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:textAlignment="center"
         android:focusable="false"
         android:clickable="true"
@@ -121,7 +128,7 @@
     <EditText
         android:id="@+id/editTextKilometraje"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginTop="20dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
@@ -131,6 +138,8 @@
         android:maxLength="9"
         android:hint="Indique el kilometraje"
         android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -139,7 +148,7 @@
     <EditText
         android:id="@+id/editTextDescripcion"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="80dp"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:layout_marginTop="20dp"
@@ -147,6 +156,8 @@
         android:ems="10"
         android:inputType="text"
         android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:hint="Descripción"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -154,6 +165,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextKilometraje" />
 
     <ImageButton
+        android:contentDescription="@string/btn_cancelar"
         android:id="@+id/btnCancelar"
         android:layout_width="70dp"
         android:layout_height="70dp"
@@ -166,6 +178,7 @@
     </ImageButton>
 
     <ImageButton
+        android:contentDescription="@string/btn_aceptar"
         android:id="@+id/btnAceptar"
         android:layout_width="70dp"
         android:layout_height="70dp"

@@ -6,58 +6,75 @@
     android:layout_height="match_parent"
     tools:context=".VehiculoActivity">
 
-    <LinearLayout
-        android:id="@+id/menu"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:orientation="horizontal"
+        android:background="@color/azul_claro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/azul_claro"
-        android:gravity="center">
-        <ImageButton
-            android:id="@+id/btnGaraje"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/garaje">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        </ImageButton>
-        <ImageButton
-            android:id="@+id/btnProgramarMantenimiento"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/programarmantenimiento">
+    <ImageButton
+        android:id="@+id/btnGaraje"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="5dp"
+        android:src="@drawable/garaje"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        </ImageButton>
-        <ImageButton
-            android:id="@+id/btnActualizarKilometraje"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/actualizarkilometrajae">
+    </ImageButton>
 
-        </ImageButton>
+    <ImageButton
+        android:id="@+id/btnProgramarMantenimiento"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/programarmantenimiento"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toStartOf="@+id/btnActualizarKilometraje"
+        app:layout_constraintStart_toEndOf="@+id/btnGaraje"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/btnListMantRealizados"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/listamantenimientosrealizados">
+    </ImageButton>
 
-        </ImageButton>
-        <ImageButton
-            android:id="@+id/btnNuevoMantenimiento"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/nuevomantenimiento">
+    <ImageButton
+        android:id="@+id/btnActualizarKilometraje"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/actualizarkilometrajae"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        </ImageButton>
+    </ImageButton>
 
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/btnListMantRealizados"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/listamantenimientosrealizados"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toStartOf="@+id/btnNuevoMantenimiento"
+        app:layout_constraintStart_toEndOf="@+id/btnActualizarKilometraje"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/btnNuevoMantenimiento"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="5dp"
+        android:src="@drawable/nuevomantenimiento"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ImageButton>
+
 
     <TextView
         android:id="@+id/tvMarca"
@@ -152,7 +169,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
         android:id="@+id/textView10"
