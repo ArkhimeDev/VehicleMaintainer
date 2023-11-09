@@ -14,4 +14,10 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
+    @Test
+    fun crearVehiculo(){
+        val v1 = Vehiculo("1234",null,null)
+        val v2 = Vehiculo("123",null,null)
+        assertNotEquals(v1.matricula,v2.matricula)
+    }
 }
