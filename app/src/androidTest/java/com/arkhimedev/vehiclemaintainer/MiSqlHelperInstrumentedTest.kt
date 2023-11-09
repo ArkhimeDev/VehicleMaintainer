@@ -28,4 +28,25 @@ class MiSqlHelperInstrumentedTest {
         miSqlHelper.insertarVehiculo(v1)
         assertEquals(miSqlHelper.seleccionarVehiculo("1234")?.matricula ?: String(), v1.matricula)
     }
+    @Test
+    fun eliminarVehiculo(){
+        val v1 = Vehiculo("2345FRT","Seat","Ibiza")
+        miSqlHelper.insertarVehiculo(v1)
+        miSqlHelper.borrarVehiculo(v1.matricula!!)
+        assertNull(miSqlHelper.seleccionarVehiculo(v1.matricula!!))
+    }
+    @Test
+    fun actualizarKilometrajeVehiculo(){
+        val v1 = Vehiculo("1234",
+            "V1234567890",
+            "Fiat",
+            "Tipo",
+            "01/12/1999",
+            0,
+            "Gasolina"
+        )
+        miSqlHelper.insertarVehiculo(v1)
+        miSqlHelper.actualizarKilometraje("1234",100)
+        assertEquals(100, miSqlHelper.seleccionarVehiculo("1234")?.kilometraje ?: Int)
+    }
 }
