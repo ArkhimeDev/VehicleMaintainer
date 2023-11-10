@@ -8,10 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper
 class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, null,DATABASE_VERSION) {
 
     companion object{
-        val DATABASE_NAME = "VehicleMaintainer.db"
-        val DATABASE_VERSION = 1
+        const val DATABASE_NAME = "VehicleMaintainer.db"
+        var DATABASE_VERSION = 1
 
-        val SQL_CREATE_VEHICULO = "CREATE TABLE vehiculo (" +
+        const val SQL_CREATE_VEHICULO = "CREATE TABLE vehiculo (" +
                 "matricula TEXT PRIMARY KEY," +
                 "numero_bastidor TEXT," +
                 "marca TEXT," +
@@ -20,7 +20,7 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
                 "kilometraje INTEGER," +
                 "tipo_combustible TEXT)"
 
-        val SQL_CREATE_MANTENIMIENTO="CREATE TABLE mantenimiento (" +
+        const val SQL_CREATE_MANTENIMIENTO="CREATE TABLE mantenimiento (" +
                 "id_mantenimiento INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "descripcion TEXT, " +
                 "fecha TEXT," +
@@ -31,7 +31,7 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
                 "FOREIGN KEY(matricula) REFERENCES vehiculo(matricula)" +
                 "ON DELETE CASCADE)"
 
-        val SQL_CREATE_MENSAJE="CREATE TABLE mensaje (" +
+        const val SQL_CREATE_MENSAJE="CREATE TABLE mensaje (" +
                 "id_mensaje INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "mensaje TEXT, " +
                 "fecha TEXT," +
@@ -44,8 +44,8 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
 
     override fun onCreate(db: SQLiteDatabase?) {
         db!!.execSQL(SQL_CREATE_VEHICULO)
-        db!!.execSQL(SQL_CREATE_MANTENIMIENTO)
-        db!!.execSQL(SQL_CREATE_MENSAJE)
+        db.execSQL(SQL_CREATE_MANTENIMIENTO)
+        db.execSQL(SQL_CREATE_MENSAJE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -143,13 +143,15 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
                 kilometraje = datos.getInt(5),
                 tipoCombustible = datos.getString(6)
             )
+            datos.close()
+            db.close()
             return vehiculo
         }
         else {
+            datos.close()
+            db.close()
             return null
         }
-        datos.close()
-        db.close()
     }
     //Función que devuelve un objeto de tipo Vehiculo con matricula, marca y modelo pasando
     //por parámetro un idMantenimiento
@@ -161,20 +163,21 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
                 "AND m.id_mantenimiento = '$idMantenimiento'",
             null
         )
-
         if (datos.moveToFirst()){
             val vehiculo = Vehiculo(
                 matricula = datos.getString(0),
                 marca = datos.getString(1),
                 modelo = datos.getString(2)
             )
+            datos.close()
+            db.close()
             return vehiculo
         }
         else {
+            datos.close()
+            db.close()
             return null
         }
-        datos.close()
-        db.close()
     }
 
     //Función que devuelve una lista de objetos de tipo Vehiculo
@@ -184,7 +187,7 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
         val listaVehiculos = mutableListOf<Vehiculo>()
 
         if (datos.moveToFirst()) {
-            val vehiculo = Vehiculo(
+            var vehiculo = Vehiculo(
                 matricula = datos.getString(0),
                 numeroBastidor = datos.getString(1),
                 marca = datos.getString(2),
@@ -196,7 +199,7 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
             listaVehiculos.add(vehiculo)
 
             while (datos.moveToNext()){
-                val vehiculo = Vehiculo(
+                vehiculo = Vehiculo(
                     matricula = datos.getString(0),
                     numeroBastidor = datos.getString(1),
                     marca = datos.getString(2),
@@ -207,13 +210,15 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
                 )
                 listaVehiculos.add(vehiculo)
             }
+            datos.close()
+            db.close()
             return listaVehiculos
         }
         else{
+            datos.close()
+            db.close()
             return null
         }
-        datos.close()
-        db.close()
     }
 
     //Función que devuelve un objeto de tipo Mantenimiento pasando por parametro el idMantenimiento
@@ -231,14 +236,14 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
                 tipo = datos.getString(5),
                 matricula = datos.getString(6)
             )
-
+            datos.close()
+            db.close()
             return mantenimiento
         }
-        else{
+        else{datos.close()
+            db.close()
             return null
         }
-        datos.close()
-        db.close()
     }
 
     //Función que devuelve una lista de objetos de tipo Mantenimiento pasando por parametro el tipo
@@ -248,7 +253,7 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
         val listaMantenimiento = mutableListOf<Mantenimiento>()
 
         if (datos.moveToFirst()) {
-            val mantenimiento = Mantenimiento(
+            var mantenimiento = Mantenimiento(
                 idMantenimiento = datos.getInt(0),
                 descripcion = datos.getString(1),
                 fecha = datos.getString(2),
@@ -260,7 +265,7 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
             listaMantenimiento.add(mantenimiento)
 
             while (datos.moveToNext()){
-                val mantenimiento = Mantenimiento(
+                mantenimiento = Mantenimiento(
                     idMantenimiento = datos.getInt(0),
                     descripcion = datos.getString(1),
                     fecha = datos.getString(2),
@@ -271,13 +276,15 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
                 )
                 listaMantenimiento.add(mantenimiento)
             }
+            datos.close()
+            db.close()
             return listaMantenimiento
         }
         else{
+            datos.close()
+            db.close()
             return null
         }
-        datos.close()
-        db.close()
     }
 
     //Función que devuelve una lista de objetos de tipo Mantenimiento pasando por parametro la matricula y el tipo
@@ -287,7 +294,7 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
         val listaMantenimiento = mutableListOf<Mantenimiento>()
 
         if (datos.moveToFirst()) {
-            val mantenimiento = Mantenimiento(
+            var mantenimiento = Mantenimiento(
                 idMantenimiento = datos.getInt(0),
                 descripcion = datos.getString(1),
                 fecha = datos.getString(2),
@@ -299,7 +306,7 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
             listaMantenimiento.add(mantenimiento)
 
             while (datos.moveToNext()){
-                val mantenimiento = Mantenimiento(
+                mantenimiento = Mantenimiento(
                     idMantenimiento = datos.getInt(0),
                     descripcion = datos.getString(1),
                     fecha = datos.getString(2),
@@ -310,13 +317,15 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
                 )
                 listaMantenimiento.add(mantenimiento)
             }
+            datos.close()
+            db.close()
             return listaMantenimiento
         }
         else{
+            datos.close()
+            db.close()
             return null
         }
-        datos.close()
-        db.close()
     }
 
     //Función que devuelve un Mensaje parando por parametro un idMantenimiento
@@ -332,12 +341,14 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
                 estado = datos.getInt(4),
                 idMantenimiento = datos.getInt(5)
             )
+            datos.close()
+            db.close()
             return mensaje
         }else{
+            datos.close()
+            db.close()
             return null
         }
-        datos.close()
-        db.close()
     }
 
     //Función que devuelve una lista de objetos de tipo Mensaje
@@ -347,7 +358,7 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
         val listaMensaje = mutableListOf<Mensaje>()
 
         if (datos.moveToFirst()) {
-            val mensaje = Mensaje(
+            var mensaje = Mensaje(
                 idMensaje = datos.getInt(0),
                 mensaje = datos.getString(1),
                 fecha = datos.getString(2),
@@ -358,7 +369,7 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
             listaMensaje.add(mensaje)
 
             while (datos.moveToNext()){
-                val mensaje = Mensaje(
+                mensaje = Mensaje(
                     idMensaje = datos.getInt(0),
                     mensaje = datos.getString(1),
                     fecha = datos.getString(2),
@@ -368,13 +379,15 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
                 )
                 listaMensaje.add(mensaje)
             }
+            datos.close()
+            db.close()
             return listaMensaje
         }
         else{
+            datos.close()
+            db.close()
             return null
         }
-        datos.close()
-        db.close()
     }
 
     //Función para actualizar el estado del Mensaje pasando el id_mensaje por parámetro
