@@ -216,6 +216,31 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
         db.close()
     }
 
+    //Función que devuelve un objeto de tipo Mantenimiento pasando por parametro el idMantenimiento
+    fun seleccionarMantenimiento (idMantenimiento:Int):Mantenimiento?{
+        val db = this.readableDatabase
+        val datos = db.rawQuery("SELECT * FROM mantenimiento WHERE  id_mantenimiento= '$idMantenimiento'",null)
+
+        if (datos.moveToFirst()) {
+            val mantenimiento = Mantenimiento(
+                idMantenimiento = datos.getInt(0),
+                descripcion = datos.getString(1),
+                fecha = datos.getString(2),
+                kilometraje = datos.getInt(3),
+                importe = datos.getFloat(4),
+                tipo = datos.getString(5),
+                matricula = datos.getString(6)
+            )
+
+            return mantenimiento
+        }
+        else{
+            return null
+        }
+        datos.close()
+        db.close()
+    }
+
     //Función que devuelve una lista de objetos de tipo Mantenimiento pasando por parametro el tipo
     fun seleccionarListaMantenimientoTipo (tipoMantenimiento:String):MutableList<Mantenimiento>?{
         val db = this.readableDatabase
@@ -365,6 +390,21 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
         val db = this.writableDatabase
         db.execSQL("PRAGMA foreign_keys=ON")
         db.delete("mensaje", "id_mensaje='$idMensaje'",null)
+        db.close()
+    }
+    //Función para borrar un mensaje pasando un idMantenimiento por parámetro
+    fun borrarMensajeIdMantenimiento(idMantenimiento: Int){
+        val db = this.writableDatabase
+        db.execSQL("PRAGMA foreign_keys=ON")
+        db.delete("mensaje", "id_mantenimiento='$idMantenimiento'",null)
+        db.close()
+    }
+    fun borrarDatosTablasBD(){
+        val db = this.writableDatabase
+        db.execSQL("PRAGMA foreign_keys=ON")
+        db.execSQL("DELETE FROM mensaje")
+        db.execSQL("DELETE FROM mantenimiento")
+        db.execSQL("DELETE FROM vehiculo")
         db.close()
     }
 }
