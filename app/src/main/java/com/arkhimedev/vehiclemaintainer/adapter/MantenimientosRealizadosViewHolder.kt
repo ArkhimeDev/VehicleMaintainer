@@ -17,6 +17,6 @@ class MantenimientosRealizadosViewHolder(view:View):RecyclerView.ViewHolder(view
         fecha.text=mantenimiento.fecha
         descripcion.text=mantenimiento.descripcion
         kilometros.text=mantenimiento.kilometraje.toString()
-        importe.text=mantenimiento.importe.toString()
+        importe.setText("${mantenimiento.importe.toString()} €")
     }
 }
