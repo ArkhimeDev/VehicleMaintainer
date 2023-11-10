@@ -19,10 +19,20 @@ class MensajeViewHolder(view: View):RecyclerView.ViewHolder(view) {
     val tvDescripcion = view.findViewById<TextView>(R.id.tvDescripcion)
     val btnEliminar = view.findViewById<ImageButton>(R.id.btnEliminar)
     val miSqlHelper = MiSqlHelper(view.context)
+    val inicioDescripcion = "Tienes que realizar un mantenimiento programado con descripción: "
+    var vehiculoString = ""
+    var finalDascripcion = ""
 
     fun render(mensaje: Mensaje){
-
-        tvDescripcion.setText(mensaje.mensaje)
+        val vehiculo = miSqlHelper.seleccionarVehiculoIdMantenimiento(mensaje.idMantenimiento!!)
+        vehiculoString = "${vehiculo!!.marca} ${vehiculo!!.modelo} con matrícula ${vehiculo!!.matricula}"
+        if(mensaje.fecha!=null){
+            finalDascripcion = "\nFecha de programada  para el ${mensaje.fecha}."
+        }
+        else{
+            finalDascripcion = "\nKilometraje programado a los ${mensaje.kilometraje} km."
+        }
+        tvDescripcion.setText(vehiculoString+"\n"+inicioDescripcion+mensaje.mensaje+finalDascripcion)
         if(mensaje.estado == LEIDO){
             cbLeido.isChecked = true
         }

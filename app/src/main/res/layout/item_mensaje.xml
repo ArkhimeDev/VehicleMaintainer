@@ -42,6 +42,7 @@
         android:id="@+id/btnEliminar"
         android:layout_width="69dp"
         android:layout_height="75dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDescripcion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/papelera" />

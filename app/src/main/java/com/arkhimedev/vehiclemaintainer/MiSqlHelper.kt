@@ -151,6 +151,31 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
         datos.close()
         db.close()
     }
+    //Función que devuelve un objeto de tipo Vehiculo con matricula, marca y modelo pasando
+    //por parámetro un idMantenimiento
+    fun seleccionarVehiculoIdMantenimiento (idMantenimiento: Int):Vehiculo?{
+        val db = this.readableDatabase
+        val datos = db.rawQuery("SELECT v.matricula,v.marca,v.modelo " +
+                "FROM vehiculo v, mantenimiento m " +
+                "WHERE v.matricula = m.matricula " +
+                "AND m.id_mantenimiento = '$idMantenimiento'",
+            null
+        )
+
+        if (datos.moveToFirst()){
+            val vehiculo = Vehiculo(
+                matricula = datos.getString(0),
+                marca = datos.getString(1),
+                modelo = datos.getString(2)
+            )
+            return vehiculo
+        }
+        else {
+            return null
+        }
+        datos.close()
+        db.close()
+    }
 
     //Función que devuelve una lista de objetos de tipo Vehiculo
     fun seleccionarListaVehiculos ():List<Vehiculo>?{
@@ -326,42 +351,7 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
         datos.close()
         db.close()
     }
-    //Función que devuelve una lista de Mensaje que estén previstos por kilometraje
-    fun seleccionarListaMensajeKilometraje ():MutableList<Mensaje>?{
-        val db = this.readableDatabase
-        val datos = db.rawQuery("SELECT * FROM mensaje WHERE fecha = null",null)
-        val listaMensaje = mutableListOf<Mensaje>()
 
-        if (datos.moveToFirst()) {
-            val mensaje = Mensaje(
-                idMensaje = datos.getInt(0),
-                mensaje = datos.getString(1),
-                fecha = datos.getString(2),
-                kilometraje = datos.getInt(3),
-                estado = datos.getInt(4),
-                idMantenimiento = datos.getInt(5)
-            )
-            listaMensaje.add(mensaje)
-
-            while (datos.moveToNext()){
-                val mensaje = Mensaje(
-                    idMensaje = datos.getInt(0),
-                    mensaje = datos.getString(1),
-                    fecha = datos.getString(2),
-                    kilometraje = datos.getInt(3),
-                    estado = datos.getInt(4),
-                    idMantenimiento = datos.getInt(5)
-                )
-                listaMensaje.add(mensaje)
-            }
-            return listaMensaje
-        }
-        else{
-            return null
-        }
-        datos.close()
-        db.close()
-    }
     //Función para actualizar el estado del Mensaje pasando el id_mensaje por parámetro
     fun actualizarEstadoMensaje (id_mensaje:Int, estado : Int){
         val db = this.writableDatabase

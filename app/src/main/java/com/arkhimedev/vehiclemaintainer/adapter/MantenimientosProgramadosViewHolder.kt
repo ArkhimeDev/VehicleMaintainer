@@ -23,7 +23,8 @@ class MantenimientosProgramadosViewHolder(view: View): RecyclerView.ViewHolder(v
     val miSqlHelper = MiSqlHelper(view.context)
 
     fun renderizado(mantenimiento: Mantenimiento){
-        matricula.setText("Vehiculo con matrícula ${mantenimiento.matricula}")
+        val vehiculo = miSqlHelper.seleccionarVehiculoIdMantenimiento(mantenimiento.idMantenimiento!!)
+        matricula.setText("${vehiculo!!.marca} ${vehiculo!!.modelo} con matrícula ${vehiculo!!.matricula}")
         if(mantenimiento.fecha!=null){
             tipoMantenimiento.setText("Mantenimiento programado el ${mantenimiento.fecha}")
         }
