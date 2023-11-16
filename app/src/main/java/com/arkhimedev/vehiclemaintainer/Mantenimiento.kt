@@ -7,12 +7,26 @@ class Mantenimiento {
     }
 
     var idMantenimiento:Int?=null
+        get() = field
+        set(value){field=value}
     var descripcion:String?=null
+        get() = field
+        set(value){field=value}
     var fecha:String?=null
+        get() = field
+        set(value){field=value}
     var kilometraje:Int?=null
+        get() = field
+        set(value){field=value}
     var importe:Float?=null
+        get() = field
+        set(value){field=value}
     var tipo:String?=null
+        get() = field
+        set(value){field=value}
     var matricula:String?=null
+        get() = field
+        set(value){field=value}
 
     constructor(
         descripcion: String?,
@@ -47,5 +61,10 @@ class Mantenimiento {
         this.tipo = tipo
         this.matricula = matricula
     }
+
+    override fun toString(): String {
+        return "Mantenimiento(idMantenimiento=$idMantenimiento, descripcion=$descripcion, fecha=$fecha, kilometraje=$kilometraje, importe=$importe, tipo=$tipo, matricula=$matricula)"
+    }
+
 
 }

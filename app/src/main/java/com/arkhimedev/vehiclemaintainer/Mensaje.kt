@@ -8,11 +8,23 @@ class Mensaje {
     }
 
     var idMensaje:Int?=null
+        get() = field
+        set(value){field=value}
     var mensaje:String?=null
+        get() = field
+        set(value){field=value}
     var fecha:String?=null
+        get() = field
+        set(value){field=value}
     var kilometraje:Int?=null
+        get() = field
+        set(value){field=value}
     var estado:Int?=null
+        get() = field
+        set(value){field=value}
     var idMantenimiento:Int?=null
+        get() = field
+        set(value){field=value}
 
 
 
@@ -32,5 +44,10 @@ class Mensaje {
         this.estado = estado
         this.idMantenimiento = idMantenimiento
     }
+
+    override fun toString(): String {
+        return "Mensaje(idMensaje=$idMensaje, mensaje=$mensaje, fecha=$fecha, kilometraje=$kilometraje, estado=$estado, idMantenimiento=$idMantenimiento)"
+    }
+
 
 }

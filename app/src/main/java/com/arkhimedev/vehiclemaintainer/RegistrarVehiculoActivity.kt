@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
 import androidx.annotation.RequiresApi
-import androidx.core.view.size
 import java.util.*
 
 class RegistrarVehiculoActivity : AppCompatActivity() {
@@ -59,6 +58,7 @@ class RegistrarVehiculoActivity : AppCompatActivity() {
             }
             //Si todos los campos tienen valor se comprueba que la matrícula indicada no exista
             else{
+                //Si la matrícula existe se lo indico al usuario mediante un Toast
                 if(!editTextMatricula.text.isEmpty()&&miSqlHelper.seleccionarVehiculo(editTextMatricula.text.toString())!=null){
                     Toast.makeText(this,"Ya existe un vehiculo con la misma matricula",Toast.LENGTH_LONG).show()
                 }
@@ -97,7 +97,6 @@ class RegistrarVehiculoActivity : AppCompatActivity() {
             val listener = DatePickerDialog.OnDateSetListener{datePicker, y, m, d ->
                 editTextFechaMatriculacion.setText("$d/${m+1}/$y")
             }
-            val milisegundos = Calendar.getInstance().timeInMillis
             DatePickerDialog(this,listener,anyo,mes,dia).show()
         }
 

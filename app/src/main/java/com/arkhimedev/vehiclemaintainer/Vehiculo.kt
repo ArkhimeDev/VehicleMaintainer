@@ -1,6 +1,5 @@
 package com.arkhimedev.vehiclemaintainer
 
-import android.content.Context
 
 class Vehiculo {
 
@@ -33,9 +32,6 @@ class Vehiculo {
     var tipoCombustible:String?=null
         get() = field
         set(value){field=value}
-    var mantenimientosRealizados = mutableListOf<Mantenimiento>()
-        get() = field
-        set(value){field=value}
 
     constructor(
         matricula: String?,
@@ -62,6 +58,6 @@ class Vehiculo {
     }
 
     override fun toString(): String {
-        return "Vehiculo(matricula=$matricula, numeroBastidor=$numeroBastidor, marca=$marca, modelo=$modelo, fechaMatriculacion=$fechaMatriculacion, kilometraje=$kilometraje, tipoCombustible=$tipoCombustible, mantenimientosRealizados=$mantenimientosRealizados)"
+        return "Vehiculo(matricula=$matricula, numeroBastidor=$numeroBastidor, marca=$marca, modelo=$modelo, fechaMatriculacion=$fechaMatriculacion, kilometraje=$kilometraje, tipoCombustible=$tipoCombustible)"
     }
 }
