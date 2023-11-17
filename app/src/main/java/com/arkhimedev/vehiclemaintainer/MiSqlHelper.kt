@@ -390,6 +390,51 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
         }
     }
 
+    //Función que devuelve una lista de objetos de tipo Mensaje de un vehículo específico pasando por parámetro una matrícula
+    fun seleccionarListaMensajeVehiculo (matricula: String):MutableList<Mensaje>?{
+        val db = this.readableDatabase
+        val datos = db.rawQuery(
+            "SELECT mensaje.id_mensaje, mensaje.mensaje, mensaje.fecha, mensaje.kilometraje, mensaje.estado, mensaje.id_mantenimiento " +
+                "FROM mensaje, mantenimiento " +
+                "WHERE mantenimiento.matricula = '$matricula' " +
+                "AND mantenimiento.id_mantenimiento = mensaje.id_mantenimiento ",
+            null
+        )
+        val listaMensaje = mutableListOf<Mensaje>()
+
+        if (datos.moveToFirst()) {
+            var mensaje = Mensaje(
+                idMensaje = datos.getInt(0),
+                mensaje = datos.getString(1),
+                fecha = datos.getString(2),
+                kilometraje = datos.getInt(3),
+                estado = datos.getInt(4),
+                idMantenimiento = datos.getInt(5)
+            )
+            listaMensaje.add(mensaje)
+
+            while (datos.moveToNext()){
+                mensaje = Mensaje(
+                    idMensaje = datos.getInt(0),
+                    mensaje = datos.getString(1),
+                    fecha = datos.getString(2),
+                    kilometraje = datos.getInt(3),
+                    estado = datos.getInt(4),
+                    idMantenimiento = datos.getInt(5)
+                )
+                listaMensaje.add(mensaje)
+            }
+            datos.close()
+            db.close()
+            return listaMensaje
+        }
+        else{
+            datos.close()
+            db.close()
+            return null
+        }
+    }
+
     //Función para actualizar el estado del Mensaje pasando el id_mensaje por parámetro
     fun actualizarEstadoMensaje (id_mensaje:Int, estado : Int){
         val db = this.writableDatabase

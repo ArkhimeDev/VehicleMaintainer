@@ -65,7 +65,7 @@ class VehiculoActivity : AppCompatActivity() {
             intent.putExtra("matricula",matricula)
             startActivity(intent)
         }
-
+        //Botón para programar un mantenimientos
         btnProgramarMantenimiento.setOnClickListener(){
             val intent = Intent(this,ProgramarMantenimientoActivity::class.java)
             intent.putExtra("matricula",matricula)

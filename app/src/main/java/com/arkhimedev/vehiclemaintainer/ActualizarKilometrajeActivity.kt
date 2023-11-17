@@ -24,23 +24,33 @@ class ActualizarKilometrajeActivity : AppCompatActivity() {
         val miSqlHelper=MiSqlHelper(this)
         val vehiculo = miSqlHelper.seleccionarVehiculo(matricula!!)
 
+        //Al pulsar el boton cancelar se
         btnCancelar.setOnClickListener(){
             this.finish()
         }
+        //Acciones que se realizan al pulsar el botón aceptar
         btnAceptar.setOnClickListener(){
+            //Si el EditText no tiene valor se le informa al usuario mediante un Toast
             if(etKilometraje.text.isEmpty()){
                 Toast.makeText(this, "Introduce un kilometraje", Toast.LENGTH_LONG).show()
             }
             else{
+                //Si el número introducido es menor o igual al kilometraje del vehiculo no se puede
+                //realizar la actualización y se informa de la situación al usuario
                 if(etKilometraje.text.toString().toInt() <= vehiculo!!.kilometraje!!){
                     Toast.makeText(this, "El kilometraje introducido no puede ser menor o igual al del vehiculo", Toast.LENGTH_LONG).show()
                 }else{
+                    //Si el número introducido es correcto se introduce en la BD y se informa al usuario
                     miSqlHelper.actualizarKilometraje(matricula,etKilometraje.text.toString().toInt())
                     val vehiculoActualizado = miSqlHelper.seleccionarVehiculo(matricula)
                     Toast.makeText(this, "El kilometraje ha sido actualizado", Toast.LENGTH_LONG).show()
-                    val listaMensajes = miSqlHelper.seleccionarListaMensaje()
+
+                    //Tras actualizar el kilometraje se recoge una lista de mensajes del vehiculo
+                    val listaMensajes = miSqlHelper.seleccionarListaMensajeVehiculo(matricula)
                     var mensajeNuevo = false
 
+                    //Si existe un mensaje para mostrar que cumpla con las condiciones se muestra una alerta
+                    //para informar al usuario
                     if(listaMensajes!=null){
                         for (mensaje in listaMensajes) {
                             if(mensaje.kilometraje!! <= vehiculoActualizado!!.kilometraje!! && mensaje.kilometraje!=0 && mensaje.estado==NO_LEIDO){
@@ -50,7 +60,7 @@ class ActualizarKilometrajeActivity : AppCompatActivity() {
                         if(mensajeNuevo){
                             mostrarAlerta()
                         }
-
+                        //Si no existe mensaje a mostrar se actualiza la Activity VehiculoActivity
                         else{
                             val intent= Intent(this,VehiculoActivity::class.java)
                             intent.putExtra("matricula",matricula)
@@ -58,6 +68,7 @@ class ActualizarKilometrajeActivity : AppCompatActivity() {
                         }
 
                     }
+                    //Si no existen mensajes en la lista se actualiza la Activity VehiculoActivity
                     if(listaMensajes==null){
                         val intent= Intent(this,VehiculoActivity::class.java)
                         intent.putExtra("matricula",matricula)
@@ -67,6 +78,7 @@ class ActualizarKilometrajeActivity : AppCompatActivity() {
             }
         }
     }
+    //Dialogo a mostrar en caso de que exista un mantenimiento a realizar tras la actualización del kilometraje
     fun mostrarAlerta(){
         AlertDialog.Builder(this)
             .setTitle("Mantenimiento a realizar")
