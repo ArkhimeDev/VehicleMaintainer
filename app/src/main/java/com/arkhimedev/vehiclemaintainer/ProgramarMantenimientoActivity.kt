@@ -27,6 +27,7 @@ class ProgramarMantenimientoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_programar_mantenimiento)
+
         //Primero se crea el canal para las notificaciones
         crearCanal()
 
@@ -69,6 +70,8 @@ class ProgramarMantenimientoActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //Si se selecciona la programación por fecha se habilitan los campos necesarios
+        //y se deshabilitan los innecesarios.
         rbFecha.setOnClickListener(){
             editTextFecha.isEnabled = true
             editTextHora.isEnabled = true
@@ -79,6 +82,8 @@ class ProgramarMantenimientoActivity : AppCompatActivity() {
             editTextHora.setBackgroundColor(getColor(R.color.gris))
        }
 
+        //Si se selecciona la programación por kilometraje se habilitan los campos necesarios
+        //y se deshabilitan los innecesarios.
         rbKilometraje.setOnClickListener(){
             editTextFecha.isEnabled = false
             editTextHora.isEnabled = false
@@ -90,6 +95,7 @@ class ProgramarMantenimientoActivity : AppCompatActivity() {
             editTextKilometraje.setBackgroundColor(getColor(R.color.gris))
         }
 
+        //Al pulsar en el editTextFecha se muestra un calendario para poder seleccionar la fecha
         editTextFecha.setOnClickListener(){
             val calendario = Calendar.getInstance()
             val dia = calendario.get(Calendar.DAY_OF_MONTH)
@@ -106,6 +112,7 @@ class ProgramarMantenimientoActivity : AppCompatActivity() {
             DatePickerDialog(this,listener,anyo,mes,dia).show()
         }
 
+        //Al pulsar en el editTextHora se muestra un reloj para poder seleccionar la hora
         editTextHora.setOnClickListener(){
             val calendario = Calendar.getInstance()
             val hora = calendario.get(Calendar.HOUR_OF_DAY)
@@ -123,6 +130,8 @@ class ProgramarMantenimientoActivity : AppCompatActivity() {
             }
             TimePickerDialog(this,listener,hora,minutos,true).show()
         }
+
+        //Al pulsar en candelar retorna a VehiculoActivity
         btnCancelar.setOnClickListener(){
             val intent=Intent(this,VehiculoActivity::class.java)
             intent.putExtra("matricula",matricula)
@@ -203,7 +212,7 @@ class ProgramarMantenimientoActivity : AppCompatActivity() {
                         NO_LEIDO,
                         idMantenimiento.toInt()
                     )
-
+                    //Se muestra un mensaje al usuario y se resetean los campos
                     miSqlHelper.insertarMensaje(mensaje)
                     Toast.makeText(this,"Programación realizada con exito",Toast.LENGTH_SHORT).show()
                     editTextFecha.setText("")
