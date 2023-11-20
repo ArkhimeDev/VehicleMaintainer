@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProgramarMantenimientoActivity">
+    tools:context=".ProgramarMantenimientoActivity"
+    android:background="@color/white">
 
     <ImageView
         android:id="@+id/imageView"
@@ -73,6 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:text="@string/txt_seleccion_fecha"
+            android:textColor="@color/black"
             android:textSize="20sp"/>
 
         <RadioButton
@@ -80,6 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:text="@string/txt_seleccion_kilometraje"
+            android:textColor="@color/black"
             android:textSize="20sp"/>
     </RadioGroup>
 

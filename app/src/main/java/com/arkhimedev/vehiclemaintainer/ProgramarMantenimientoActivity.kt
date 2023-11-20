@@ -225,7 +225,7 @@ class ProgramarMantenimientoActivity : AppCompatActivity() {
         }
     }
     //Función que genera una notificacion pasando por parámetro un objeto Calendario
-    @RequiresApi(Build.VERSION_CODES.M)
+
     private fun notificacion(calendario:Calendar){
         val intent=Intent(applicationContext,Notificacion::class.java)
         val pendingIntent=PendingIntent.getBroadcast(

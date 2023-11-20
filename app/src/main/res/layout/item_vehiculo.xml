@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
     <ImageButton
         android:id="@+id/btnEliminar"
@@ -25,6 +26,7 @@
         android:layout_marginTop="5dp"
         android:layout_gravity="center"
         android:textSize="20sp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -38,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textSize="20sp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvMarca"
@@ -54,6 +57,7 @@
         android:textAlignment="center"
         android:gravity="center"
         android:textSize="20sp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvModelo"
@@ -66,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="5dp"
         android:layout_marginTop="5dp"
-        android:background="?android:attr/listDivider"
+        android:background="@color/gris"
         app:layout_constraintTop_toBottomOf="@+id/tvMatricula"
         tools:layout_editor_absoluteX="0dp" />
 

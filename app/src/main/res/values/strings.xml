@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">VehicleMaintainer</string>
+    <string name="app_name">Vehicle Maintainer</string>
     <string name="txt_marca">Marca</string>
     <string name="txt_modelo">Modelo</string>
     <string name="txt_matricula">Matrícula</string>

@@ -6,4 +6,5 @@
     android:gravity="center"
     android:padding="10dp"
     android:textColor="@color/black"
-    xmlns:android="http://schemas.android.com/apk/res/android" />
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/fondospinner"/>
