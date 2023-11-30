@@ -7,10 +7,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 
+//Clase adicional para crear una notificación
 class Notificacion:BroadcastReceiver(){
-
+    //Constante para utilizar como id
     companion object{
         const val ID_NOTIFICACION = 1
     }
@@ -32,7 +32,7 @@ class Notificacion:BroadcastReceiver(){
         }
         val pendingIntent: PendingIntent = PendingIntent.getActivity(context,0,intent,flag)
 
-        var notificacion = NotificationCompat.Builder(context, ProgramarMantenimientoActivity.ID_CANAL)
+        val notificacion = NotificationCompat.Builder(context, ProgramarMantenimientoActivity.ID_CANAL)
             .setSmallIcon(android.R.drawable.sym_def_app_icon)
             .setContentTitle("Mantenimiento programado")
             .setContentText("Nuevo mantenimiernto a realizar")

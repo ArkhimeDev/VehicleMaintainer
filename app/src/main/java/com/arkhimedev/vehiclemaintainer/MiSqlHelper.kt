@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
+//Clase adicional para gestionar la base de datos
 class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, null,DATABASE_VERSION) {
 
     companion object{
@@ -345,45 +346,6 @@ class MiSqlHelper(context: Context):SQLiteOpenHelper(context, DATABASE_NAME, nul
             db.close()
             return mensaje
         }else{
-            datos.close()
-            db.close()
-            return null
-        }
-    }
-
-    //Función que devuelve una lista de objetos de tipo Mensaje
-    fun seleccionarListaMensaje ():MutableList<Mensaje>?{
-        val db = this.readableDatabase
-        val datos = db.rawQuery("SELECT * FROM mensaje",null)
-        val listaMensaje = mutableListOf<Mensaje>()
-
-        if (datos.moveToFirst()) {
-            var mensaje = Mensaje(
-                idMensaje = datos.getInt(0),
-                mensaje = datos.getString(1),
-                fecha = datos.getString(2),
-                kilometraje = datos.getInt(3),
-                estado = datos.getInt(4),
-                idMantenimiento = datos.getInt(5)
-            )
-            listaMensaje.add(mensaje)
-
-            while (datos.moveToNext()){
-                mensaje = Mensaje(
-                    idMensaje = datos.getInt(0),
-                    mensaje = datos.getString(1),
-                    fecha = datos.getString(2),
-                    kilometraje = datos.getInt(3),
-                    estado = datos.getInt(4),
-                    idMantenimiento = datos.getInt(5)
-                )
-                listaMensaje.add(mensaje)
-            }
-            datos.close()
-            db.close()
-            return listaMensaje
-        }
-        else{
             datos.close()
             db.close()
             return null

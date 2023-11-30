@@ -6,6 +6,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import java.util.*
 
@@ -19,6 +20,17 @@ class RegistrarVehiculoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registrar_vehiculo)
 
+        //llamada que se realizara al pulsar el botón atras del dispositivo móvil donde se mostrará
+        // enviará a la Activity GarajeActivity
+        onBackPressedDispatcher.addCallback(this, object  : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                val intent = Intent(this@RegistrarVehiculoActivity, GarajeActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        })
+
+        //Se recogen las referencias de los botones y los editTexts
         val editTextMarca = findViewById<EditText>(R.id.editTextMarca)
         val editTextModelo = findViewById<EditText>(R.id.editTextModelo)
         val editTextMatricula = findViewById<EditText>(R.id.editTextMatricula)
@@ -30,6 +42,7 @@ class RegistrarVehiculoActivity : AppCompatActivity() {
         val btnAceptar = findViewById<ImageButton>(R.id.btnAceptar)
         val btnCancelar = findViewById<ImageButton>(R.id.btnCancelar)
 
+        //Se recogen los datos a mostrar del Spinner
         ArrayAdapter.createFromResource(
             this,
             R.array.tipos_de_combustible,
@@ -45,6 +58,7 @@ class RegistrarVehiculoActivity : AppCompatActivity() {
         btnGaraje.setOnClickListener {
             val intent = Intent(this, GarajeActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         //Botón para registrar vehiculo en la base de datos
@@ -53,6 +67,7 @@ class RegistrarVehiculoActivity : AppCompatActivity() {
             if (editTextMarca.text.isEmpty()||editTextModelo.text.isEmpty()||editTextMatricula.text.isEmpty()||
                 editTextKilometraje.text.isEmpty()||editTextFechaMatriculacion.text.isEmpty()||
                 editTextNumeroBastidor.text.isEmpty()){
+
                 //Si hay algun campo vacío, se lo hago saber al usuario mediante un Toast
                 Toast.makeText(this,"Rellena todos los campos del vehículo",Toast.LENGTH_LONG).show()
             }
@@ -76,6 +91,7 @@ class RegistrarVehiculoActivity : AppCompatActivity() {
 
                     miSqlHelper.insertarVehiculo(vehiculo)
                     Toast.makeText(this,"Vehículo registrado correctamente",Toast.LENGTH_LONG).show()
+
                     //Después se resetean los editText
                     editTextMatricula.setText("")
                     editTextNumeroBastidor.setText("")
@@ -89,6 +105,7 @@ class RegistrarVehiculoActivity : AppCompatActivity() {
 
         }
 
+        //Al pulsar en el campo de fecha de matriculación se muestra un DatePicker
         editTextFechaMatriculacion.setOnClickListener(){
             val calendarioSeleccionado = Calendar.getInstance()
             val dia = calendarioSeleccionado.get(Calendar.DAY_OF_MONTH)
@@ -100,9 +117,11 @@ class RegistrarVehiculoActivity : AppCompatActivity() {
             DatePickerDialog(this,listener,anyo,mes,dia).show()
         }
 
+        //Al pulsar en cancelar se regresa a la pantalla principal
         btnCancelar.setOnClickListener(){
             val intent=Intent(this,GarajeActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
 

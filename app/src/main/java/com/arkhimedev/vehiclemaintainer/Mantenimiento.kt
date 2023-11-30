@@ -1,11 +1,13 @@
 package com.arkhimedev.vehiclemaintainer
 
 class Mantenimiento {
+    //Constantes para utilizar como tipo
     companion object{
         const val  MANTENIMIENTO_PROGRAMADO = "programado"
         const val  MANTENIMIENTO_REALIZADO = "realizado"
     }
 
+    //Propiedades, getters y setters
     var idMantenimiento:Int?=null
         get() = field
         set(value){field=value}
@@ -28,6 +30,7 @@ class Mantenimiento {
         get() = field
         set(value){field=value}
 
+    //Constructores
     constructor(
         descripcion: String?,
         fecha: String?,
@@ -62,6 +65,7 @@ class Mantenimiento {
         this.matricula = matricula
     }
 
+    //Método toString
     override fun toString(): String {
         return "Mantenimiento(idMantenimiento=$idMantenimiento, descripcion=$descripcion, fecha=$fecha, kilometraje=$kilometraje, importe=$importe, tipo=$tipo, matricula=$matricula)"
     }

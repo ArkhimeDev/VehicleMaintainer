@@ -25,9 +25,9 @@ class MensajeViewHolder(view: View):RecyclerView.ViewHolder(view) {
 
     fun render(mensaje: Mensaje){
         val vehiculo = miSqlHelper.seleccionarVehiculoIdMantenimiento(mensaje.idMantenimiento!!)
-        vehiculoString = "${vehiculo!!.marca} ${vehiculo!!.modelo} con matrícula ${vehiculo!!.matricula}"
+        vehiculoString = "${vehiculo!!.marca}${vehiculo!!.modelo}con matrícula ${vehiculo!!.matricula}"
         if(mensaje.fecha!=null){
-            finalDascripcion = "\nFecha de programada  para el ${mensaje.fecha}."
+            finalDascripcion = "\nFecha programada para el ${mensaje.fecha}."
         }
         else{
             finalDascripcion = "\nKilometraje programado a los ${mensaje.kilometraje} km."

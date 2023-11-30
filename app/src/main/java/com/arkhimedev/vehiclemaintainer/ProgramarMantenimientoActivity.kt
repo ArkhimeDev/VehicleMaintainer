@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import com.arkhimedev.vehiclemaintainer.Mantenimiento.Companion.MANTENIMIENTO_PROGRAMADO
 import com.arkhimedev.vehiclemaintainer.Mensaje.Companion.NO_LEIDO
@@ -27,6 +28,16 @@ class ProgramarMantenimientoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_programar_mantenimiento)
+
+        //llamada que se realizara al pulsar el botón atras del dispositivo móvil donde se mostrará
+        // enviará a la Activity GarajeActivity
+        onBackPressedDispatcher.addCallback(this, object  : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                val intent = Intent(this@ProgramarMantenimientoActivity, GarajeActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        })
 
         //Primero se crea el canal para las notificaciones
         crearCanal()
@@ -68,6 +79,7 @@ class ProgramarMantenimientoActivity : AppCompatActivity() {
         btnGaraje.setOnClickListener(){
             val intent = Intent(this,GarajeActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         //Si se selecciona la programación por fecha se habilitan los campos necesarios
@@ -151,7 +163,7 @@ class ProgramarMantenimientoActivity : AppCompatActivity() {
                     //Si los campos tienen valor, se instancia un objeto Mantenimiento y un objeto Mensaje
                     //para insertarlos en la base de datos
                     val mantenimiento = Mantenimiento(
-                        "Vehículo con matricula $matricula \nDescripción: ${editTextDescripcion.text.toString()} con fecha ${editTextFecha.text.toString()} ",
+                        editTextDescripcion.text.toString(),
                         editTextFecha.text.toString(),
                         null,
                         null,
@@ -197,7 +209,7 @@ class ProgramarMantenimientoActivity : AppCompatActivity() {
                     //Si los campos tienen valor, se instancia un objeto Mantenimiento y un objeto Mensaje
                     //para insertarlos en la base de datos
                     val mantenimiento = Mantenimiento(
-                        "Vehículo con matricula $matricula \nDescripción: ${editTextDescripcion.text.toString()} a los ${editTextKilometraje.text.toString()} km",
+                        editTextDescripcion.text.toString(),
                         null,
                         editTextKilometraje.text.toString().toInt(),
                         null,
@@ -224,8 +236,8 @@ class ProgramarMantenimientoActivity : AppCompatActivity() {
             }
         }
     }
-    //Función que genera una notificacion pasando por parámetro un objeto Calendario
 
+    //Función que genera una notificacion pasando por parámetro un objeto Calendario
     private fun notificacion(calendario:Calendar){
         val intent=Intent(applicationContext,Notificacion::class.java)
         val pendingIntent=PendingIntent.getBroadcast(
@@ -237,6 +249,7 @@ class ProgramarMantenimientoActivity : AppCompatActivity() {
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendario.getTimeInMillis(), pendingIntent)
     }
+
     //Función para crear el canal para las notificaciones dependiendo de la versión de Android
     private fun crearCanal(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){

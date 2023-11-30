@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 
@@ -14,6 +15,17 @@ class VehiculoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vehiculo)
 
+        //llamada que se realizara al pulsar el botón atras del dispositivo móvil donde se mostrará
+        // enviará a la Activity GarajeActivity
+        onBackPressedDispatcher.addCallback(this, object  : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                val intent = Intent(this@VehiculoActivity, GarajeActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        })
+
+        //Se recogen las referencias de los botones y los TextView
         val btnGaraje = findViewById<ImageButton>(R.id.btnGaraje)
         val btnProgramarMantenimiento = findViewById<ImageButton>(R.id.btnProgramarMantenimiento)
         val btnActualizarKilometraje = findViewById<ImageButton>(R.id.btnActualizarKilometraje)
@@ -27,12 +39,13 @@ class VehiculoActivity : AppCompatActivity() {
         val tvTipoCombustible = findViewById<TextView>(R.id.tvTipoCombustible)
         val tvNumeroBastidor = findViewById<TextView>(R.id.tvNumeroBastidor)
 
+        //Se recoge la matricula enviada por la Activity
         val bundle = intent.extras
         val matricula = bundle?.getString("matricula")
         val miSqlHelper = MiSqlHelper(this)
 
-        //Toast.makeText(this, matricula, Toast.LENGTH_SHORT).show()
-
+        //Se selecciona el vehículo de la base de datos con la matrícula recibida y
+        // se rellenan los campos de los TextViews
         val vehiculo = miSqlHelper.seleccionarVehiculo(matricula!!)
         tvMarca.setText(vehiculo?.marca)
         tvModelo.setText(vehiculo?.modelo)
@@ -46,6 +59,7 @@ class VehiculoActivity : AppCompatActivity() {
         btnGaraje.setOnClickListener {
             val intent = Intent(this, GarajeActivity::class.java)
             startActivity(intent)
+            finish()
         }
         //Botón para actualizar el kilometraje
         btnActualizarKilometraje.setOnClickListener {
@@ -58,18 +72,21 @@ class VehiculoActivity : AppCompatActivity() {
             val intent = Intent(this,RegistrarMantenimientoActivity::class.java)
             intent.putExtra("matricula",matricula)
             startActivity(intent)
+            finish()
         }
         //Botón para ver todos los mantenimientos realizados
         btnListMantRealizados.setOnClickListener(){
             val intent = Intent(this,MantenimientosRealizadosActivity::class.java)
             intent.putExtra("matricula",matricula)
             startActivity(intent)
+            finish()
         }
         //Botón para programar un mantenimientos
         btnProgramarMantenimiento.setOnClickListener(){
             val intent = Intent(this,ProgramarMantenimientoActivity::class.java)
             intent.putExtra("matricula",matricula)
             startActivity(intent)
+            finish()
         }
 
     }

@@ -3,6 +3,7 @@ package com.arkhimedev.vehiclemaintainer
 
 class Vehiculo {
 
+    //Propiedades, getters y setters
     var matricula:String?=null
         get() = field
         set(value){ //Si el valor no es null enimino los espacios en blanco y lo paso a mayusculas
@@ -33,6 +34,7 @@ class Vehiculo {
         get() = field
         set(value){field=value}
 
+    //Constructores
     constructor(
         matricula: String?,
         numeroBastidor: String?,
@@ -57,6 +59,7 @@ class Vehiculo {
         this.modelo = modelo
     }
 
+    //Método toString
     override fun toString(): String {
         return "Vehiculo(matricula=$matricula, numeroBastidor=$numeroBastidor, marca=$marca, modelo=$modelo, fechaMatriculacion=$fechaMatriculacion, kilometraje=$kilometraje, tipoCombustible=$tipoCombustible)"
     }

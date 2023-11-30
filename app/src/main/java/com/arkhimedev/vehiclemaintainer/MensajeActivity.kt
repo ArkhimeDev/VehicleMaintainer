@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
+import androidx.activity.OnBackPressedCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arkhimedev.vehiclemaintainer.adapter.MensajeAdapter
@@ -17,13 +18,27 @@ class MensajeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mensaje)
 
+        //llamada que se realizara al pulsar el botón atras del dispositivo móvil donde se mostrará
+        // enviará a la Activity GarajeActivity
+        onBackPressedDispatcher.addCallback(this, object  : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                val intent = Intent(this@MensajeActivity, GarajeActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        })
+
+        //Se recoge la referencia del botón
         val btnGaraje = findViewById<ImageButton>(R.id.btnGaraje)
 
+        //Se inicia el RecyclerView llamando a la función iniciarRecyclerView
         iniciarRecyclerView()
 
+        //Botón que retorna a la GarajeActivity
         btnGaraje.setOnClickListener(){
             val intent = Intent(this, GarajeActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
     //Función que inicia el RecyclerView

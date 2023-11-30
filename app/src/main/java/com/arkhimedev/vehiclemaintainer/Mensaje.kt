@@ -2,11 +2,13 @@ package com.arkhimedev.vehiclemaintainer
 
 
 class Mensaje {
+    //Constantes para utilizar como estado
     companion object{
         const val NO_LEIDO = 0
         const val LEIDO = 1
     }
 
+    //Propiedades, getters y setters
     var idMensaje:Int?=null
         get() = field
         set(value){field=value}
@@ -26,8 +28,7 @@ class Mensaje {
         get() = field
         set(value){field=value}
 
-
-
+    //Constructores
     constructor(mensaje: String?, fecha: String?, kilometraje: Int?, estado: Int?, idMantenimiento:Int?) {
         this.mensaje = mensaje
         this.fecha = fecha
@@ -45,6 +46,7 @@ class Mensaje {
         this.idMantenimiento = idMantenimiento
     }
 
+    //Método toString
     override fun toString(): String {
         return "Mensaje(idMensaje=$idMensaje, mensaje=$mensaje, fecha=$fecha, kilometraje=$kilometraje, estado=$estado, idMantenimiento=$idMantenimiento)"
     }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import android.window.OnBackInvokedDispatcher
+import androidx.activity.OnBackPressedCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arkhimedev.vehiclemaintainer.Mantenimiento.Companion.MANTENIMIENTO_PROGRAMADO
@@ -14,6 +15,16 @@ class MantenimientosProgramadosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mantenimientos_programados)
+
+        //llamada que se realizara al pulsar el botón atras del dispositivo móvil donde se mostrará
+        // enviará a la Activity GarajeActivity
+        onBackPressedDispatcher.addCallback(this, object  : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                val intent = Intent(this@MantenimientosProgramadosActivity, GarajeActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        })
 
         //Se recogen la referencia del botón
         val btnGaraje = findViewById<ImageButton>(R.id.btnGaraje)
@@ -29,6 +40,7 @@ class MantenimientosProgramadosActivity : AppCompatActivity() {
         btnGaraje.setOnClickListener(){
             val intent = Intent(this, GarajeActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
     //Función que inicia el RecyclerView correspondiente

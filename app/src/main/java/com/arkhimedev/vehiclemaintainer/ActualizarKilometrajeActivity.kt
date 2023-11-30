@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.arkhimedev.vehiclemaintainer.Mensaje.Companion.NO_LEIDO
@@ -16,15 +17,31 @@ class ActualizarKilometrajeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_actualizar_kilometraje)
 
+        //llamada que se realizara al pulsar el botón atras del dispositivo móvil donde se mostrará
+        // enviará a la Activity VehiculoActivity
+        onBackPressedDispatcher.addCallback(this, object  : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+                val intent= Intent(this@ActualizarKilometrajeActivity,VehiculoActivity::class.java)
+                intent.putExtra("matricula",matricula)
+                startActivity(intent)
+                finish()
+            }
+        })
+
+        //Se recogen las referencias de los botones y los editTexts
         val btnAceptar = findViewById<Button>(R.id.btnAceptar)
         val btnCancelar = findViewById<Button>(R.id.btnCancelar)
         val etKilometraje = findViewById<EditText>(R.id.etKilometraje)
+
+        //Se recoge la matricula enviada por la Activity
         val bundle = intent.extras
         val matricula = bundle?.getString("matricula")
+
+        //Creacion de las variables necesarias
         val miSqlHelper=MiSqlHelper(this)
         val vehiculo = miSqlHelper.seleccionarVehiculo(matricula!!)
 
-        //Al pulsar el boton cancelar se
+        //Al pulsar el boton cancelar se finaliza la Activity
         btnCancelar.setOnClickListener(){
             this.finish()
         }
@@ -65,6 +82,7 @@ class ActualizarKilometrajeActivity : AppCompatActivity() {
                             val intent= Intent(this,VehiculoActivity::class.java)
                             intent.putExtra("matricula",matricula)
                             startActivity(intent)
+                            finish()
                         }
 
                     }
@@ -73,6 +91,7 @@ class ActualizarKilometrajeActivity : AppCompatActivity() {
                         val intent= Intent(this,VehiculoActivity::class.java)
                         intent.putExtra("matricula",matricula)
                         startActivity(intent)
+                        finish()
                     }
                 }
             }
