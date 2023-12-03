@@ -105,6 +105,7 @@ class ActualizarKilometrajeActivity : AppCompatActivity() {
             .setPositiveButton(R.string.txt_aceptar){ dialog, which ->
                 val intent = Intent(this,MensajeActivity::class.java)
                 ContextCompat.startActivity(this, intent, null)
+                finish()
             }
             .setIcon(android.R.drawable.ic_dialog_alert)
             .show()
