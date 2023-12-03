@@ -79,8 +79,7 @@
         </activity>
         <activity
             android:name=".GarajeActivity"
-            android:exported="true"
-            android:launchMode="singleTask">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

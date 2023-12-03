@@ -1,6 +1,7 @@
 package com.arkhimedev.vehiclemaintainer.adapter
 
 
+import android.app.Activity
 import android.content.Intent
 import android.view.View
 import android.widget.ImageButton
@@ -33,6 +34,8 @@ class VehiculoViewHolder(view:View):RecyclerView.ViewHolder(view){
                     Toast.makeText(btnEliminar.context,"Vehículo eliminado", Toast.LENGTH_SHORT).show()
                     val intent = Intent(btnEliminar.context,GarajeActivity::class.java)
                     startActivity(btnEliminar.context,intent,null)
+                    val activity = it.context as?Activity
+                    activity?.finish()
                 }
                 .setNegativeButton(R.string.txt_cancelar,null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
@@ -43,7 +46,8 @@ class VehiculoViewHolder(view:View):RecyclerView.ViewHolder(view){
             val intent=  Intent(btnSeleccionarVehiculo.context,VehiculoActivity::class.java)
             intent.putExtra("matricula",vehiculo.matricula)
             startActivity(btnSeleccionarVehiculo.context,intent,null)
-
+            val activity = it.context as?Activity
+            activity?.finish()
         }
     }
 
